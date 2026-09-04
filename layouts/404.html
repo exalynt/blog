@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Locale | default "en" }}">
+<head>
+  {{ partial "head.html" . }}
+</head>
+<body>
+  {{ partial "header.html" . }}
+  <main>
+    <section class="not-found">
+      <div class="container">
+        <p class="eyebrow">404</p>
+        <h1>Page not found</h1>
+        <p class="lede">The page you're looking for doesn't exist or has moved.</p>
+        <p class="section-cta"><a class="btn btn-primary" href="{{ "/" | relURL }}">Back to the blog</a></p>
+      </div>
+    </section>
+  </main>
+  {{ partial "footer.html" . }}
+</body>
+</html>

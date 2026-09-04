@@ -1,0 +1,35 @@
+<footer class="site-footer">
+  <div class="container footer-statement">
+    <p>
+      <strong>Exalynt Engineering</strong><br />
+      Pursue excellence. Learn continuously. Build things that matter.
+    </p>
+  </div>
+  <div class="container footer-inner">
+    <a href="{{ "/" | relURL }}" class="brand">
+      {{ partial "mark.html" . }}
+      <span>EXALYNT</span>
+    </a>
+    <nav class="footer-nav">
+      {{ range .Site.Menus.main }}
+        <a href="{{ .URL | relURL }}">{{ .Name }}</a>
+      {{ end }}
+      {{ with .Site.Params.siteURL }}
+        <a href="{{ . }}">Exalynt.com</a>
+      {{ end }}
+    </nav>
+    <div class="footer-meta">
+      {{ with .Site.Params.gitHubURL }}
+        <a href="{{ . }}" target="_blank" rel="noreferrer" class="icon-link" aria-label="Exalynt on GitHub" title="View on GitHub">
+          {{ partial "icons.html" "github" }}
+        </a>
+      {{ end }}
+      {{ with .Site.Params.linkedInURL }}
+        <a href="{{ . }}" target="_blank" rel="noreferrer" class="icon-link" aria-label="Exalynt on LinkedIn" title="Connect on LinkedIn">
+          {{ partial "icons.html" "linkedin" }}
+        </a>
+      {{ end }}
+      <p class="copyright">&copy; {{ now.Year }} Exalynt Engineering.</p>
+    </div>
+  </div>
+</footer>

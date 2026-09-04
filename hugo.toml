@@ -1,0 +1,47 @@
+baseURL = 'https://blog.exalynt.com/'
+locale = 'en-us'
+title = 'Exalynt Blog'
+
+paginate = 10
+enableRobotsTXT = true
+buildDrafts = false
+buildFuture = false
+buildExpired = false
+
+[minify]
+  disableXML = true
+
+[params]
+  description = 'Blogging and writing for Exalynt'
+  author = 'Exalynt'
+  siteURL = 'https://exalynt.com'
+  homeTitle = 'Welcome to the Exalynt Blog'
+  homeSubtitle = 'Thoughts, updates, and engineering notes from the Exalynt team.'
+  linkedInURL = 'https://www.linkedin.com/in/john-peterson-dev/'
+  gitHubURL = 'https://github.com/john-peterson-g17'
+
+[[menu.main]]
+  identifier = 'posts'
+  name = 'Posts'
+  url = '/posts/'
+  weight = 10
+
+[[menu.main]]
+  identifier = 'tags'
+  name = 'Tags'
+  url = '/tags/'
+  weight = 20
+
+[outputs]
+  home = ['HTML', 'RSS']
+
+[markup]
+  [markup.highlight]
+    noClasses = false
+    codeFences = true
+    style = 'github-dark'
+  [markup.goldmark.renderer]
+    unsafe = false
+
+[taxonomies]
+  tag = 'tags'

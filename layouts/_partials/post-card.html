@@ -1,0 +1,10 @@
+<article class="post-card">
+  <div class="post-card-meta">
+    {{ with .Params.category }}<span class="post-category">{{ . }}</span>{{ end }}
+    <span>{{ .Date.Format "January 2, 2006" }}</span>
+    <span>{{ .ReadingTime }} min read</span>
+  </div>
+  <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+  {{ with .Params.summary }}<p>{{ . }}</p>{{ end }}
+  {{ with .Params.tags }}<p class="post-tags">{{ delimit . " · " }}</p>{{ end }}
+</article>

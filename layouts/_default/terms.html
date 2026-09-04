@@ -1,0 +1,18 @@
+{{ define "main" }}
+<section class="section">
+  <div class="container">
+    <div class="section-intro">
+      <p class="eyebrow">{{ .Title }}</p>
+      <h1>Browse by tag</h1>
+    </div>
+
+    <ul class="tag-list">
+      {{ range .Paginator.Pages }}
+      <li>
+        <a href="{{ .RelPermalink }}">{{ .Title }} <span class="tag-count">({{ len .Pages }})</span></a>
+      </li>
+      {{ end }}
+    </ul>
+  </div>
+</section>
+{{ end }}

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" role="img" aria-label="Exalynt X logo">
+  <g fill="currentColor">
+    <!-- upper-left stroke -->
+    <path d="M25 71 L58 71 L85 98 L68 116 Z"/>
+    <!-- primary rising stroke -->
+    <path d="M28 173 L57 173 L194 38 L162 38 Z"/>
+    <!-- lower-right stroke -->
+    <path d="M110 145 L127 129 L170 172 L137 172 Z"/>
+  </g>
+</svg>

@@ -1,0 +1,24 @@
+{{ define "main" }}
+<article class="section">
+  <div class="container">
+    <header class="post-header">
+      {{ with .Params.category }}<p class="eyebrow">{{ . }}</p>{{ end }}
+      <h1>{{ .Title }}</h1>
+      <div class="post-card-meta">
+        <span>{{ .Date.Format "January 2, 2006" }}</span>
+        <span>{{ .ReadingTime }} min read</span>
+        {{ with .Params.author }}<span>{{ . }}</span>{{ end }}
+      </div>
+      {{ with .Params.tags }}<p class="post-tags">{{ delimit . " · " }}</p>{{ end }}
+    </header>
+
+    <div class="post-content">
+      {{ .Content }}
+    </div>
+
+    <footer class="post-footer">
+      <a class="btn btn-secondary btn-sm" href="{{ "/posts/" | relURL }}">&larr; Back to all posts</a>
+    </footer>
+  </div>
+</article>
+{{ end }}

@@ -1,0 +1,34 @@
+{{ define "main" }}
+<section class="section">
+  <div class="container">
+    <div class="section-intro">
+      <p class="eyebrow">Posts</p>
+      <h1>Writing from the Exalynt team</h1>
+      <p>Engineering notes, product updates, and thoughts on building software.</p>
+    </div>
+
+    {{ $sorted := .Pages.ByDate.Reverse }}
+    {{ $paginator := .Paginate $sorted }}
+    {{ if eq (len $sorted) 0 }}
+    <p class="writing-empty">Nothing published yet &mdash; the first post is on its way. Check back soon.</p>
+    {{ else }}
+    <div class="post-list">
+      {{ range $paginator.Pages }}
+      {{ partial "post-card.html" . }}
+      {{ end }}
+    </div>
+
+    {{ if gt $paginator.TotalPages 1 }}
+    <nav class="section-cta" aria-label="Pagination">
+      {{ if $paginator.HasPrev }}
+      <a class="btn btn-secondary btn-sm" href="{{ $paginator.Prev.URL }}">&larr; Newer</a>
+      {{ end }}
+      {{ if $paginator.HasNext }}
+      <a class="btn btn-secondary btn-sm" href="{{ $paginator.Next.URL }}">Older &rarr;</a>
+      {{ end }}
+    </nav>
+    {{ end }}
+    {{ end }}
+  </div>
+</section>
+{{ end }}

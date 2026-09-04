@@ -1,0 +1,23 @@
+{{ define "main" }}
+<section class="section">
+  <div class="container">
+    <div class="section-intro">
+      <p class="eyebrow">Tag</p>
+      <h1>{{ .Title }}</h1>
+    </div>
+
+    {{ $sorted := .Pages.ByDate.Reverse }}
+    {{ if eq (len $sorted) 0 }}
+    <p class="writing-empty">No posts tagged &ldquo;{{ .Title }}&rdquo; yet.</p>
+    {{ else }}
+    <div class="post-list">
+      {{ range $sorted }}
+      {{ partial "post-card.html" . }}
+      {{ end }}
+    </div>
+    {{ end }}
+
+    <p class="section-cta"><a class="btn btn-secondary btn-sm" href="{{ "/tags/" | relURL }}">&larr; All tags</a></p>
+  </div>
+</section>
+{{ end }}
