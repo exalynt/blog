@@ -1,5 +1,5 @@
 baseURL = 'https://blog.exalynt.com/'
-locale = 'en-us'
+languageCode = 'en-us'
 title = 'Exalynt Blog'
 
 enableRobotsTXT = true
