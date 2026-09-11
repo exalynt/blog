@@ -5,17 +5,23 @@
       <span>EXALYNT</span>
       <span class="brand-tag">Blog</span>
     </a>
-    <nav class="site-nav">
+    <nav id="site-nav" class="site-nav">
       {{ range .Site.Menus.main }}
         <a href="{{ .URL | relURL }}">{{ .Name }}</a>
       {{ end }}
       {{ with .Site.Params.siteURL }}
         <a href="{{ . }}">Exalynt.com</a>
       {{ end }}
+    </nav>
+    <div class="header-controls">
       <button id="theme-toggle" class="theme-toggle" aria-label="Toggle color theme" title="Toggle color theme">
         {{ partial "icons.html" "moon" }}
         {{ partial "icons.html" "sun" }}
       </button>
-    </nav>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav">
+        {{ partial "icons.html" "menu" }}
+        {{ partial "icons.html" "close" }}
+      </button>
+    </div>
   </div>
 </header>
