@@ -1,6 +1,6 @@
 +++
 date = '2026-09-11T10:00:00-06:00'
-draft = true
+draft = false
 title = 'In Pursuit of Excellence'
 tags = ['excellence', 'software-engineering', 'personal-growth']
 summary = 'Excellence is not perfection. It is the continual pursuit of growth, quality, and meaningful improvement.'
