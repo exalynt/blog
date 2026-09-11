@@ -21,6 +21,10 @@ buildExpired = false
   homeSubtitle = 'Thoughts, updates, and engineering notes from the Exalynt team.'
   linkedInURL = 'https://www.linkedin.com/in/john-peterson-dev/'
   gitHubURL = 'https://github.com/john-peterson-g17'
+  authorName = 'John Peterson'
+  authorPhoto = '/images/john_peterson.jpg'
+  authorBio = 'Software architect writing about the pursuit of excellence in software engineering.'
+  authorEmail = 'john.peterson@exalynt.com'
 
 [[menu.main]]
   identifier = 'posts'

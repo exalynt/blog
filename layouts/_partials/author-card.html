@@ -1,0 +1,30 @@
+{{- $authorName := .Site.Params.authorName -}}
+{{- if $authorName -}}
+<div class="author-card">
+  {{ with .Site.Params.authorPhoto }}
+    <img class="author-card-photo" src="{{ . | relURL }}" alt="Photo of {{ $authorName }}" loading="lazy" />
+  {{ end }}
+  <div class="author-card-body">
+    <p class="author-card-label">Written by</p>
+    <p class="author-card-name">{{ $authorName }}</p>
+    {{ with .Site.Params.authorBio }}<p class="author-card-bio">{{ . }}</p>{{ end }}
+    <div class="author-card-links">
+      {{ with .Site.Params.gitHubURL }}
+        <a href="{{ . }}" target="_blank" rel="noreferrer" class="icon-link" aria-label="{{ $authorName }} on GitHub" title="GitHub">
+          {{ partial "icons.html" "github" }}
+        </a>
+      {{ end }}
+      {{ with .Site.Params.linkedInURL }}
+        <a href="{{ . }}" target="_blank" rel="noreferrer" class="icon-link" aria-label="{{ $authorName }} on LinkedIn" title="LinkedIn">
+          {{ partial "icons.html" "linkedin" }}
+        </a>
+      {{ end }}
+      {{ with .Site.Params.authorEmail }}
+        <a href="mailto:{{ . }}" class="icon-link" aria-label="Email {{ $authorName }}" title="Email">
+          {{ partial "icons.html" "email" }}
+        </a>
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{- end -}}

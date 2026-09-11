@@ -16,6 +16,8 @@
       {{ .Content }}
     </div>
 
+    {{ partial "author-card.html" . }}
+
     <footer class="post-footer">
       <a class="btn btn-secondary btn-sm" href="{{ "/posts/" | relURL }}">&larr; Back to all posts</a>
     </footer>

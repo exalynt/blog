@@ -27,13 +27,9 @@
   --text: var(--color-slate);
   --accent: var(--color-blue);
 
-  /* Semantic tokens — fixed dark surfaces (header CTA, footer);
-     these stay midnight regardless of the toggle, by design. */
-  --charcoal: var(--color-midnight);
+  /* Semantic tokens — fixed dark surface (code blocks);
+     stays midnight regardless of the toggle, by design. */
   --charcoal-deep: #04060b;
-  --on-charcoal-text: var(--color-text-secondary-dark);
-  --on-charcoal-border: rgb(255 255 255 / 16%);
-  --on-charcoal-accent: var(--color-blue);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -203,7 +199,7 @@ a {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: var(--bg);
+  background: var(--bg-alt);
   border-bottom: 1px solid var(--border);
 }
 
@@ -396,10 +392,31 @@ a {
 }
 
 .post-card {
+  position: relative;
   padding: 28px;
   border: 1px solid var(--border);
   border-radius: 4px;
-  background: var(--bg);
+  background: var(--bg-alt);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 16px 32px -18px rgba(0, 0, 0, 0.45);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .post-card {
+    transition: none;
+  }
+
+  .post-card:hover {
+    transform: none;
+  }
 }
 
 .post-card h2 {
@@ -412,8 +429,14 @@ a {
   color: var(--ink);
 }
 
-.post-card h2 a:hover {
+.post-card:hover h2 a {
   color: var(--accent);
+}
+
+.post-card-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
 }
 
 .post-card p {
@@ -539,6 +562,74 @@ a {
   color: var(--color-text-primary-dark);
 }
 
+.author-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  max-width: 720px;
+  margin: 48px auto 0;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg-alt);
+}
+
+.author-card-photo {
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--border);
+}
+
+.author-card-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text);
+  opacity: 0.75;
+  margin: 0;
+}
+
+.author-card-name {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 2px 0 0;
+}
+
+.author-card-bio {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text);
+  margin: 6px 0 0;
+}
+
+.author-card-links {
+  display: flex;
+  gap: 4px;
+  margin-top: 10px;
+}
+
+.author-card-links .icon-link {
+  width: 30px;
+  height: 30px;
+  color: var(--text);
+}
+
+.author-card-links .icon-link:hover {
+  color: var(--accent);
+}
+
+@media (max-width: 520px) {
+  .author-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
 .post-footer {
   max-width: 720px;
   margin: 48px auto 0;
@@ -583,27 +674,28 @@ a {
 /* Footer */
 
 .site-footer {
-  background: var(--charcoal-deep);
-  color: var(--on-charcoal-text);
+  background: var(--bg-alt);
+  color: var(--text);
   padding: 32px 0;
   margin-top: auto;
+  border-top: 1px solid var(--border);
 }
 
 .footer-statement {
   padding-bottom: 28px;
   margin-bottom: 28px;
-  border-bottom: 1px solid var(--on-charcoal-border);
+  border-bottom: 1px solid var(--border);
 }
 
 .footer-statement p {
   margin: 0;
   font-size: 15px;
   line-height: 1.6;
-  color: var(--on-charcoal-text);
+  color: var(--text);
 }
 
 .footer-statement strong {
-  color: var(--color-white);
+  color: var(--ink);
   font-family: var(--heading);
   font-size: 16px;
 }
@@ -618,11 +710,11 @@ a {
 
 .footer-inner .brand {
   font-size: 14px;
-  color: var(--color-white);
+  color: var(--ink);
 }
 
 .footer-inner .brand .brand-mark {
-  color: var(--color-white);
+  color: var(--ink);
 }
 
 .footer-nav {
@@ -632,14 +724,14 @@ a {
 }
 
 .footer-nav a {
-  color: var(--on-charcoal-text);
+  color: var(--text);
   text-decoration: none;
   font-size: 14px;
   font-weight: 500;
 }
 
 .footer-nav a:hover {
-  color: var(--color-white);
+  color: var(--ink);
 }
 
 .footer-meta {
@@ -654,12 +746,12 @@ a {
   justify-content: center;
   width: 34px;
   height: 34px;
-  color: var(--on-charcoal-text);
+  color: var(--text);
   transition: color 0.2s;
 }
 
 .icon-link:hover {
-  color: var(--color-white);
+  color: var(--ink);
 }
 
 .icon-link-icon {
@@ -669,7 +761,7 @@ a {
 
 .copyright {
   font-size: 13px;
-  color: var(--on-charcoal-text);
+  color: var(--text);
 }
 
 /* 404 */

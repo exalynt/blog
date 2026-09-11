@@ -3,8 +3,9 @@
     {{ with .Params.category }}<span class="post-category">{{ . }}</span>{{ end }}
     <span>{{ .Date.Format "January 2, 2006" }}</span>
     <span>{{ .ReadingTime }} min read</span>
+    {{ with .Params.author | default .Site.Params.authorName }}<span>{{ . }}</span>{{ end }}
   </div>
-  <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+  <h2><a class="post-card-link" href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
   {{ with .Params.summary }}<p>{{ . }}</p>{{ end }}
   {{ with .Params.tags }}<p class="post-tags">{{ delimit . " · " }}</p>{{ end }}
 </article>
