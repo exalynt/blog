@@ -1136,6 +1136,37 @@ a {
   color: inherit;
 }
 
+/* Markdown footnotes, used as a post's references */
+.post-content .footnote-ref {
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.post-content sup {
+  line-height: 0;
+}
+
+.post-content .footnotes {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.post-content .footnotes hr {
+  display: none;
+}
+
+.post-content .footnotes ol {
+  padding-left: 1.5em;
+}
+
+.post-content .footnotes li + li {
+  margin-top: 12px;
+}
+
+.post-content .footnote-backref {
+  text-decoration: none;
+}
+
 .post-content a {
   color: var(--accent-ink);
   text-decoration-color: color-mix(in srgb, var(--accent) 35%, transparent);
