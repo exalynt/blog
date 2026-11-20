@@ -1,9 +1,8 @@
 <footer class="site-footer">
+  {{ partial "mark.html" (dict "class" "watermark") }}
   <div class="container footer-statement">
-    <p>
-      <strong>Exalynt Engineering</strong><br />
-      Pursue excellence. Learn continuously. Build things that matter.
-    </p>
+    <p class="eyebrow">Exalynt Engineering</p>
+    <p class="footer-motto">Pursue excellence. Learn continuously. Build things that matter.</p>
   </div>
   <div class="container footer-inner">
     <a href="{{ "/" | relURL }}" class="brand">
@@ -17,6 +16,9 @@
       {{ with .Site.Params.siteURL }}
         <a href="{{ . }}">Exalynt.com</a>
       {{ end }}
+      {{ with .Site.GetPage "/" }}{{ with .OutputFormats.Get "RSS" }}
+        <a href="{{ .RelPermalink }}">RSS</a>
+      {{ end }}{{ end }}
     </nav>
     <div class="footer-meta">
       {{ with .Site.Params.gitHubURL }}

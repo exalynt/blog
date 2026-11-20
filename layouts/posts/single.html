@@ -1,26 +1,42 @@
 {{ define "main" }}
-<article class="section">
-  <div class="container">
-    <header class="post-header">
-      {{ with .Params.category }}<p class="eyebrow">{{ . }}</p>{{ end }}
-      <h1>{{ .Title }}</h1>
-      <div class="post-card-meta">
-        <span>{{ .Date.Format "January 2, 2006" }}</span>
-        <span>{{ .ReadingTime }} min read</span>
-        {{ with .Params.author }}<span>{{ . }}</span>{{ end }}
+<div class="read-progress" aria-hidden="true"></div>
+<article>
+  <header class="page-hero post-hero">
+    {{ partial "mark.html" (dict "class" "watermark") }}
+    <div class="container">
+      <div class="post-column">
+        <a class="back-link" href="{{ "/posts/" | relURL }}">&larr; All posts</a>
+        <h1>{{ .Title }}</h1>
+        {{ with .Params.summary }}<p class="lede">{{ . }}</p>{{ end }}
+        <div class="byline">
+          {{ $authorName := .Params.author | default .Site.Params.authorName }}
+          {{ if and (eq $authorName .Site.Params.authorName) .Site.Params.authorPhoto }}
+          <img class="byline-photo" src="{{ .Site.Params.authorPhoto | relURL }}" alt="" />
+          {{ end }}
+          <div>
+            {{ with $authorName }}<p class="byline-name">{{ . }}</p>{{ end }}
+            {{ partial "post-meta.html" . }}
+          </div>
+        </div>
+        {{ partial "post-tags.html" . }}
       </div>
-      {{ with .Params.tags }}<p class="post-tags">{{ delimit . " · " }}</p>{{ end }}
-    </header>
-
-    <div class="post-content">
-      {{ .Content }}
     </div>
+  </header>
 
-    {{ partial "author-card.html" . }}
+  <div class="section post-body">
+    <div class="container">
+      <div class="post-column post-content">
+        {{ .Content }}
+      </div>
 
-    <footer class="post-footer">
-      <a class="btn btn-secondary btn-sm" href="{{ "/posts/" | relURL }}">&larr; Back to all posts</a>
-    </footer>
+      <div class="post-column">
+        {{ partial "author-card.html" . }}
+
+        <footer class="post-footer">
+          <a class="btn btn-secondary btn-sm" href="{{ "/posts/" | relURL }}">&larr; Back to all posts</a>
+        </footer>
+      </div>
+    </div>
   </div>
 </article>
 {{ end }}

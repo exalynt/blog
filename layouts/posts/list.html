@@ -1,18 +1,21 @@
 {{ define "main" }}
+<section class="page-hero">
+  {{ partial "mark.html" (dict "class" "watermark") }}
+  <div class="container hero-copy">
+    <p class="eyebrow">Posts</p>
+    <h1>Writing from the Exalynt team</h1>
+    <p class="lede">Engineering notes, product updates, and thoughts on building software.</p>
+  </div>
+</section>
+
 <section class="section">
   <div class="container">
-    <div class="section-intro">
-      <p class="eyebrow">Posts</p>
-      <h1>Writing from the Exalynt team</h1>
-      <p>Engineering notes, product updates, and thoughts on building software.</p>
-    </div>
-
     {{ $sorted := .Pages.ByDate.Reverse }}
     {{ $paginator := .Paginate $sorted }}
     {{ if eq (len $sorted) 0 }}
     <p class="writing-empty">Nothing published yet &mdash; the first post is on its way. Check back soon.</p>
     {{ else }}
-    <div class="post-list">
+    <div class="post-grid">
       {{ range $paginator.Pages }}
       {{ partial "post-card.html" . }}
       {{ end }}

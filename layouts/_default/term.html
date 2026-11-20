@@ -1,16 +1,20 @@
 {{ define "main" }}
+<section class="page-hero">
+  {{ partial "mark.html" (dict "class" "watermark") }}
+  <div class="container hero-copy">
+    <p class="eyebrow">Tag</p>
+    <h1>#{{ .Data.Term }}</h1>
+    <p class="lede">{{ len .Pages }} {{ cond (eq (len .Pages) 1) "post" "posts" }} tagged &ldquo;{{ .Data.Term }}&rdquo;.</p>
+  </div>
+</section>
+
 <section class="section">
   <div class="container">
-    <div class="section-intro">
-      <p class="eyebrow">Tag</p>
-      <h1>{{ .Title }}</h1>
-    </div>
-
     {{ $sorted := .Pages.ByDate.Reverse }}
     {{ if eq (len $sorted) 0 }}
     <p class="writing-empty">No posts tagged &ldquo;{{ .Title }}&rdquo; yet.</p>
     {{ else }}
-    <div class="post-list">
+    <div class="post-grid">
       {{ range $sorted }}
       {{ partial "post-card.html" . }}
       {{ end }}

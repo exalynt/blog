@@ -6,12 +6,15 @@
 <body>
   {{ partial "header.html" . }}
   <main>
-    <section class="not-found">
-      <div class="container">
+    <section class="hero not-found">
+      {{ partial "mark.html" (dict "class" "watermark") }}
+      <div class="container hero-copy">
         <p class="eyebrow">404</p>
         <h1>Page not found</h1>
         <p class="lede">The page you're looking for doesn't exist or has moved.</p>
-        <p class="section-cta"><a class="btn btn-primary" href="{{ "/" | relURL }}">Back to the blog</a></p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="{{ "/" | relURL }}">Back to the blog &rarr;</a>
+        </div>
       </div>
     </section>
   </main>

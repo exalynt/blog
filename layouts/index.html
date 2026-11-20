@@ -1,33 +1,44 @@
 {{ define "main" }}
 <section class="hero">
-  <div class="container">
+  {{ partial "mark.html" (dict "class" "watermark") }}
+  <div class="container hero-copy">
     <p class="eyebrow">Exalynt Blog</p>
     <h1>{{ .Site.Params.homeTitle | default .Site.Title }}</h1>
     {{ with .Site.Params.homeSubtitle }}
     <p class="lede">{{ . }}</p>
     {{ end }}
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="{{ "/posts/" | relURL }}">Read the posts &rarr;</a>
+      <a class="btn btn-secondary" href="{{ "/tags/" | relURL }}">Browse by tag</a>
+    </div>
   </div>
 </section>
 
 <section class="section">
   <div class="container">
-    <div class="section-intro">
-      <p class="eyebrow">Latest</p>
-      <h2>Recent posts</h2>
-    </div>
-
     {{ $posts := where .Site.RegularPages "Type" "posts" }}
     {{ $posts = $posts.ByDate.Reverse }}
     {{ if eq (len $posts) 0 }}
     <p class="writing-empty">Nothing published yet &mdash; the first post is on its way. Check back soon.</p>
     {{ else }}
-    <div class="post-list">
-      {{ range first 5 $posts }}
+    {{ partial "post-card.html" (dict "page" (index $posts 0) "featured" true) }}
+
+    {{ $rest := first 6 (after 1 $posts) }}
+    {{ with $rest }}
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Archive</p>
+        <h2>More writing</h2>
+      </div>
+      {{ if gt (len $posts) 7 }}
+      <a class="btn btn-secondary btn-sm" href="{{ "/posts/" | relURL }}">View all posts &rarr;</a>
+      {{ end }}
+    </div>
+    <div class="post-grid">
+      {{ range . }}
       {{ partial "post-card.html" . }}
       {{ end }}
     </div>
-    {{ if gt (len $posts) 5 }}
-    <p class="section-cta"><a class="btn btn-secondary" href="{{ "/posts/" | relURL }}">View all posts</a></p>
     {{ end }}
     {{ end }}
   </div>

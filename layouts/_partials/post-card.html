@@ -1,11 +1,16 @@
-<article class="post-card">
-  <div class="post-card-meta">
-    {{ with .Params.category }}<span class="post-category">{{ . }}</span>{{ end }}
-    <span>{{ .Date.Format "January 2, 2006" }}</span>
-    <span>{{ .ReadingTime }} min read</span>
-    {{ with .Params.author | default .Site.Params.authorName }}<span>{{ . }}</span>{{ end }}
-  </div>
+{{- /* Usage: {{ partial "post-card.html" (dict "page" . "featured" true) }}, or just the page. */ -}}
+{{- $page := . -}}
+{{- $featured := false -}}
+{{- if reflect.IsMap . -}}{{- $page = .page -}}{{- $featured = .featured | default false -}}{{- end -}}
+{{- with $page -}}
+<article class="post-card{{ if $featured }} post-card-featured{{ end }}">
+  {{ if $featured }}<span class="badge">Latest post</span>{{ end }}
+  {{ partial "post-meta.html" . }}
   <h2><a class="post-card-link" href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-  {{ with .Params.summary }}<p>{{ . }}</p>{{ end }}
-  {{ with .Params.tags }}<p class="post-tags">{{ delimit . " · " }}</p>{{ end }}
+  {{ with .Params.summary }}<p class="post-card-summary">{{ . }}</p>{{ end }}
+  <div class="post-card-footer">
+    {{ partial "post-tags.html" . }}
+    <span class="read-more" aria-hidden="true">Read <span class="arrow">&rarr;</span></span>
+  </div>
 </article>
+{{- end -}}

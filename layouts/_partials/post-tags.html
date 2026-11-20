@@ -1,0 +1,7 @@
+{{- with .GetTerms "tags" -}}
+<ul class="tag-pills" aria-label="Tags">
+  {{- range . }}
+  <li><a class="tag-pill" href="{{ .RelPermalink }}">{{ .Data.Term }}</a></li>
+  {{- end }}
+</ul>
+{{- end -}}

@@ -1,15 +1,22 @@
 {{ define "main" }}
+<section class="page-hero">
+  {{ partial "mark.html" (dict "class" "watermark") }}
+  <div class="container hero-copy">
+    <p class="eyebrow">{{ .Title }}</p>
+    <h1>Browse by tag</h1>
+    <p class="lede">Find posts by topic.</p>
+  </div>
+</section>
+
 <section class="section">
   <div class="container">
-    <div class="section-intro">
-      <p class="eyebrow">{{ .Title }}</p>
-      <h1>Browse by tag</h1>
-    </div>
-
     <ul class="tag-list">
       {{ range .Paginator.Pages }}
       <li>
-        <a href="{{ .RelPermalink }}">{{ .Title }} <span class="tag-count">({{ len .Pages }})</span></a>
+        <a href="{{ .RelPermalink }}">
+          <span class="tag-hash" aria-hidden="true">#</span>{{ .Data.Term }}
+          <span class="tag-count">{{ len .Pages }}</span>
+        </a>
       </li>
       {{ end }}
     </ul>
