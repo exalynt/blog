@@ -1,0 +1,2 @@
+{{- /* A standalone takeaway set apart from the surrounding section: {{< callout >}}...{{< /callout >}} */ -}}
+<aside class="callout">{{ .Inner | .Page.RenderString (dict "display" "block") }}</aside>

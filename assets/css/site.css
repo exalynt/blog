@@ -1136,6 +1136,31 @@ a {
   color: inherit;
 }
 
+/* Text walls from the wall shortcode: a run of text shown as texture, fading out to say "and on and on" */
+.post-content .text-wall {
+  font-size: 0.85em;
+  line-height: 1.55;
+  color: var(--text);
+  -webkit-mask-image: linear-gradient(to bottom, #000 35%, rgb(0 0 0 / 12%) 100%);
+  mask-image: linear-gradient(to bottom, #000 35%, rgb(0 0 0 / 12%) 100%);
+}
+
+/* Callouts from the callout shortcode: a takeaway that stands apart from its section */
+.post-content .callout {
+  margin: 2.5em 0;
+  padding: 1.25em 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+  font-size: 1.15em;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+.post-content .callout p {
+  margin: 0;
+}
+
 /* Markdown footnotes, used as a post's references */
 .post-content .footnote-ref {
   text-decoration: none;
