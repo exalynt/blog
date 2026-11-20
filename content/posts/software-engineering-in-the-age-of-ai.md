@@ -1,6 +1,6 @@
 +++
 date = '2026-11-20T10:00:00-07:00'
-draft = true
+draft = false
 title = 'Why Are Software Engineers Still a Thing?'
 tags = ['software-engineering', 'craft', 'judgment', 'ai']
 summary = 'Once AI could write code, fellow business owners, family, and other engineers all asked me the same question. Working out what software engineering actually is gave me the answer.'
