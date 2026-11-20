@@ -23,7 +23,7 @@ buildExpired = false
   gitHubURL = 'https://github.com/john-peterson-g17'
   authorName = 'John Peterson'
   authorPhoto = '/images/john_peterson.jpg'
-  authorBio = 'Software architect writing about the pursuit of excellence in software engineering.'
+  authorBio = 'Founder | Software architect striving to inspire and pursue excellence'
   authorEmail = 'john.peterson@exalynt.com'
 
 [[menu.main]]
