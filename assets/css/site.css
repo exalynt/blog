@@ -90,6 +90,12 @@ html {
   scroll-padding-top: calc(var(--header-height) + 24px);
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 :root[data-theme="light"] {
   color-scheme: light;
 }
@@ -860,6 +866,213 @@ a {
 
 .post-body {
   padding-top: 56px;
+}
+
+/* Table of contents
+   Narrow screens: a collapsible "On this page" box above the post.
+   Wide screens: a sticky sidebar right of the post. The hero uses the same
+   grid so the title stays aligned with the body. */
+
+.toc ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.toc nav > ul {
+  border-left: 1px solid var(--border);
+}
+
+.toc nav a {
+  display: block;
+  margin-left: -1px;
+  padding: 6px 0 6px 16px;
+  border-left: 2px solid transparent;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--text);
+  text-decoration: none;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
+}
+
+.toc nav a:hover {
+  color: var(--ink);
+}
+
+.toc nav a[aria-current="true"] {
+  color: var(--accent-ink);
+  border-left-color: var(--accent);
+  font-weight: 600;
+}
+
+.toc nav ul ul a {
+  padding-left: 30px;
+  font-size: 13px;
+}
+
+.toc-inline {
+  margin-bottom: 40px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-alt);
+}
+
+.toc-inline summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  cursor: pointer;
+  list-style: none;
+}
+
+.toc-inline summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Chevron drawn from borders, as site's FAQ items */
+.toc-inline summary::after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  margin-right: 4px;
+  border-right: 2px solid var(--accent);
+  border-bottom: 2px solid var(--accent);
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform 0.2s;
+}
+
+.toc-inline[open] summary::after {
+  transform: rotate(-135deg) translateY(-2px);
+}
+
+.toc-inline nav {
+  padding: 0 18px 16px;
+}
+
+.toc-side {
+  display: none;
+}
+
+.toc-title {
+  margin-bottom: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+/* Back to top: an action, so it's set apart from the list by a divider and
+   styled as a small pill button rather than another link in the rail. */
+.toc-footer {
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+/* Shown only once the reader has scrolled away from the top (theme.js adds
+   .is-visible). Space stays reserved so the sidebar doesn't jump. Without JS
+   it simply stays visible. */
+.js .toc-footer {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s linear 0.3s;
+}
+
+.js .toc-footer.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .toc-footer,
+  .js .toc-footer.is-visible {
+    transform: none;
+  }
+}
+
+.toc-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px 5px 6px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: none;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
+}
+
+.toc-top-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-size: 12px;
+  color: var(--accent-ink);
+  background: var(--accent-tint);
+  box-shadow: inset 0 0 0 1px var(--accent-ring);
+}
+
+.toc-top:hover {
+  color: var(--ink);
+  border-color: var(--accent);
+}
+
+@media (min-width: 1180px) {
+  .post-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 720px minmax(220px, 1fr);
+    column-gap: 56px;
+  }
+
+  .post-layout > * {
+    grid-column: 2;
+  }
+
+  .post-layout .toc-inline {
+    display: none;
+  }
+
+  .post-layout .toc-side {
+    display: block;
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    align-self: start;
+    position: sticky;
+    top: calc(var(--header-height) + 40px);
+    /* Grows to the viewport's height before it scrolls. The bottom padding
+       leaves room for back-to-top's 8px slide-in offset, which would
+       otherwise count as overflow and show a scrollbar. */
+    max-height: calc(100svh - var(--header-height) - 80px);
+    overflow-y: auto;
+    padding-bottom: 16px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
 }
 
 /* Prose — follows readme/src/css/custom.css */

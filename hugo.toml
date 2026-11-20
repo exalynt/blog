@@ -48,6 +48,10 @@ buildExpired = false
     style = 'github-dark'
   [markup.goldmark.renderer]
     unsafe = false
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 3
+    ordered = false
 
 [taxonomies]
   tag = 'tags'

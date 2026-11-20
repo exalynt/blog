@@ -1,9 +1,13 @@
 {{ define "main" }}
+{{- /* Hugo's TOC wraps itself in <nav id="TableOfContents">; it's rendered
+       twice below (sidebar + inline), so drop the id to keep ids unique. */ -}}
+{{- $toc := replace .TableOfContents `<nav id="TableOfContents">` `<nav aria-label="Table of contents">` | safeHTML -}}
+{{- $hasToc := ge (len (findRE `<li>` $toc)) 2 -}}
 <div class="read-progress" aria-hidden="true"></div>
 <article>
   <header class="page-hero post-hero">
     {{ partial "mark.html" (dict "class" "watermark") }}
-    <div class="container">
+    <div class="container{{ if $hasToc }} post-layout{{ end }}">
       <div class="post-column">
         <a class="back-link" href="{{ "/posts/" | relURL }}">&larr; All posts</a>
         <h1>{{ .Title }}</h1>
@@ -24,7 +28,22 @@
   </header>
 
   <div class="section post-body">
-    <div class="container">
+    <div class="container{{ if $hasToc }} post-layout{{ end }}">
+      {{ if $hasToc }}
+      <details class="toc toc-inline">
+        <summary>On this page</summary>
+        {{ $toc }}
+      </details>
+
+      <aside class="toc toc-side">
+        <p class="toc-title">On this page</p>
+        {{ $toc }}
+        <div class="toc-footer">
+          <a class="toc-top" href="#"><span class="toc-top-icon" aria-hidden="true">&uarr;</span>Back to top</a>
+        </div>
+      </aside>
+      {{ end }}
+
       <div class="post-column post-content">
         {{ .Content }}
       </div>
