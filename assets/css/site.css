@@ -1111,6 +1111,31 @@ a {
   color: var(--ink);
 }
 
+/* Draft writing prompts from the prompt shortcode */
+.post-content .draft-prompt {
+  --prompt: #b45309;
+  padding: 12px 16px;
+  border-left: 3px solid var(--prompt);
+  background: color-mix(in srgb, var(--prompt) 10%, transparent);
+  color: var(--prompt);
+  font-style: italic;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .post-content .draft-prompt {
+    --prompt: #fbbf24;
+  }
+}
+
+:root[data-theme="dark"] .post-content .draft-prompt {
+  --prompt: #fbbf24;
+}
+
+.post-content .draft-prompt a,
+.post-content .draft-prompt strong {
+  color: inherit;
+}
+
 .post-content a {
   color: var(--accent-ink);
   text-decoration-color: color-mix(in srgb, var(--accent) 35%, transparent);
